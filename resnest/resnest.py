@@ -3,7 +3,8 @@ import torch
 
 from .resnet import ResNet
 
-_url_format = 'https://s3.us-west-1.wasabisys.com/resnest/torch/{}-{}.pth'
+#_url_format = 'https://s3.us-west-1.wasabisys.com/resnest/torch/{}-{}.pth'
+_url_format = 'https://github.com/zhanghang1989/ResNeSt/releases/download/weights_step1/{}-{}.pth'
 
 _model_sha256 = {name: checksum for checksum, name in [
     ('528c19ca', 'resnest50'),
@@ -23,10 +24,10 @@ resnest_model_urls = {name: _url_format.format(name, short_hash(name)) for
 
 def load_weight(keras_model, torch_url, group_size = 2):
     """
-    https://s3.us-west-1.wasabisys.com/resnest/torch/resnest50-528c19ca.pth
-    https://s3.us-west-1.wasabisys.com/resnest/torch/resnest101-22405ba7.pth
-    https://s3.us-west-1.wasabisys.com/resnest/torch/{resnest200-75117900.pth
-    https://s3.us-west-1.wasabisys.com/resnest/torch/{resnest269-0cc87c48.pth
+    https://s3.us-west-1.wasabisys.com/resnest/torch/resnest50-528c19ca.pth > https://github.com/zhanghang1989/ResNeSt/releases/download/weights_step1/resnest50-528c19ca.pth
+    https://s3.us-west-1.wasabisys.com/resnest/torch/resnest101-22405ba7.pth > https://github.com/zhanghang1989/ResNeSt/releases/download/weights_step1/resnest101-22405ba7.pth
+    https://s3.us-west-1.wasabisys.com/resnest/torch/resnest200-75117900.pth > https://github.com/zhanghang1989/ResNeSt/releases/download/weights_step1/resnest200-75117900.pth
+    https://s3.us-west-1.wasabisys.com/resnest/torch/resnest269-0cc87c48.pth > https://github.com/zhanghang1989/ResNeSt/releases/download/weights_step1/resnest269-0cc87c48.pth
     """
     torch_weight = torch.hub.load_state_dict_from_url(torch_url, progress = True, check_hash = True)
     
