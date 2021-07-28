@@ -33,7 +33,7 @@ def split_attention_block(x, n_filter, kernel_size = 3, stride_size = 1, dilatio
     if len(prefix) != 0:
         prefix += "_"
     out = group_conv(x, n_filter * radix, [kernel_size] * (group_size * radix), strides = stride_size, dilation_rate = dilation, padding = "same", use_bias = False, kernel_initializer = "he_normal", name = "{0}split_attention_conv1".format(prefix))
-    out = tf.keras.layers.BatchNormalization(axis = -1, epsilon = 1.001e-5, scale = True, name = "{0}split_attention_bn1".format(prefix))(out)
+    out = tf.keras.layers.BatchNormalization(axis = -1, momentum = 0.9, epsilon = 1e-5, name = "{0}split_attention_bn1".format(prefix))(out)
     if 0 < dropout_rate:
         out = tf.keras.layers.Dropout(dropout_rate, name = "{0}split_attention_dropout1".format(prefix))(out)
     out = tf.keras.layers.Activation(tf.keras.activations.relu, name = "{0}split_attention_act1".format(prefix))(out)
@@ -46,7 +46,7 @@ def split_attention_block(x, n_filter, kernel_size = 3, stride_size = 1, dilatio
     out = tf.keras.layers.Reshape([1, 1, n_filter], name = "{0}split_attention_expand_dims".format(prefix))(out)
     
     out = group_conv(out, inter_channel, [1] * group_size, padding = "same", use_bias = True, kernel_initializer = "he_normal", name = "{0}split_attention_conv2".format(prefix))
-    out = tf.keras.layers.BatchNormalization(axis = -1, epsilon = 1.001e-5, scale = True, name = "{0}split_attention_bn2".format(prefix))(out)
+    out = tf.keras.layers.BatchNormalization(axis = -1, momentum = 0.9, epsilon = 1e-5, name = "{0}split_attention_bn2".format(prefix))(out)
     out = tf.keras.layers.Activation("relu", name = "{0}split_attention_act2".format(prefix))(out)
     out = group_conv(out, n_filter * radix, [1] * group_size, padding = "same", use_bias = True, kernel_initializer = "he_normal", name = "{0}split_attention_conv3".format(prefix))
     
