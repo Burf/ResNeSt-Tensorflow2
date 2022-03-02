@@ -64,7 +64,7 @@ def load_weight(keras_model, torch_url, group_size = 2):
         tf.keras.backend.set_value(w, new_w)
     return keras_model
     
-def resnest50(include_top = True, weights = "imagenet", input_tensor = None, input_shape = None, classes = 1000):
+def resnest50(input_tensor = None, input_shape = None, classes = 1000, include_top = True, weights = "imagenet"):
     if input_tensor is None:
         img_input = tf.keras.layers.Input(shape = input_shape)
     else:
@@ -83,7 +83,7 @@ def resnest50(include_top = True, weights = "imagenet", input_tensor = None, inp
     return model
     
 
-def resnest101(include_top = True, weights = "imagenet", input_tensor = None, input_shape = None, classes = 1000):
+def resnest101(input_tensor = None, input_shape = None, classes = 1000, include_top = True, weights = "imagenet"):
     if input_tensor is None:
         img_input = tf.keras.layers.Input(shape = input_shape)
     else:
@@ -101,7 +101,7 @@ def resnest101(include_top = True, weights = "imagenet", input_tensor = None, in
         model.load_weights(weights)
     return model
 
-def resnest200(include_top = True, weights = "imagenet", input_tensor = None, input_shape = None, classes = 1000):
+def resnest200(input_tensor = None, input_shape = None, classes = 1000, include_top = True, weights = "imagenet"):
     if input_tensor is None:
         img_input = tf.keras.layers.Input(shape = input_shape)
     else:
@@ -119,7 +119,7 @@ def resnest200(include_top = True, weights = "imagenet", input_tensor = None, in
         model.load_weights(weights)
     return model
 
-def resnest269(include_top = True, weights = "imagenet", input_tensor = None, input_shape = None, classes = 1000):
+def resnest269(input_tensor = None, input_shape = None, classes = 1000, include_top = True, weights = "imagenet"):
     if input_tensor is None:
         img_input = tf.keras.layers.Input(shape = input_shape)
     else:
