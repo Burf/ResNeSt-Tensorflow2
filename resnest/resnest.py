@@ -38,7 +38,7 @@ def load_weight(keras_model, torch_url, group_size = 2):
                 v = v.permute(2, 3, 1, 0)
             elif "fc.weight" in k:
                 v = v.t()
-            weight[k] = v.data.numpy()
+            weight[k] = v.cpu().data.numpy()
     
     g = 0
     downsample = []
