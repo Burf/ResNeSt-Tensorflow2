@@ -1,5 +1,4 @@
 import tensorflow as tf
-import torch
 
 from .resnet import ResNet
 
@@ -29,7 +28,12 @@ def load_weight(keras_model, torch_url, group_size = 2):
     https://s3.us-west-1.wasabisys.com/resnest/torch/resnest200-75117900.pth > https://github.com/zhanghang1989/ResNeSt/releases/download/weights_step1/resnest200-75117900.pth
     https://s3.us-west-1.wasabisys.com/resnest/torch/resnest269-0cc87c48.pth > https://github.com/zhanghang1989/ResNeSt/releases/download/weights_step1/resnest269-0cc87c48.pth
     """
-    torch_weight = torch.hub.load_state_dict_from_url(torch_url, progress = True, check_hash = True)
+    try:
+        import torch
+        torch_weight = torch.hub.load_state_dict_from_url(torch_url, progress = True, check_hash = True)
+    except:
+        print("If you want to use 'ResNeSt Weight', please install 'torch 1.1▲'")
+        return keras_model
     
     weight = {}
     for k, v in dict(torch_weight).items():
