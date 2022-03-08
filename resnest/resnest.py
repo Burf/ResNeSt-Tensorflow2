@@ -30,7 +30,7 @@ def load_weight(keras_model, torch_url, group_size = 2):
     """
     try:
         import torch
-        torch_weight = torch.hub.load_state_dict_from_url(torch_url, progress = True, check_hash = True)
+        torch_weight = torch.hub.load_state_dict_from_url(torch_url, map_location = "cpu", progress = True, check_hash = True)
     except:
         print("If you want to use 'ResNeSt Weight', please install 'torch 1.1▲'")
         return keras_model
