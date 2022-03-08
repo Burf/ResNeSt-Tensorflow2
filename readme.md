@@ -18,7 +18,7 @@ The implementation is based on paper[1] and [official implementation](https://gi
 
 - Python 3
 - tensorflow 2
-- torch 1.1▲
+- torch 1.1▲ (Use the pre-trained weights)
 
 ## Reference
 
